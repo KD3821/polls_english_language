@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список вопросов</title>
+</head>
+<body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'opros/style.css' %}">
+<h3>Список вопросов теста: </h3>
+
+        <ur>
+        {% for question in question_filtered %}
+            <li><a href="{% url 'opros:detail' question.variant_id question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ur>
+
+        <p>tests are available.</p>
+
+</body>
+</html>
+

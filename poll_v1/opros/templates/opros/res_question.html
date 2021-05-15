@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base_generic.html" %}
+{% block content %}
+<h2>ТЕСТ ВАРИАНТ №{{ question.variant_id }}</h2>
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% for answer in question.answer_set.all %}
+        <li>{{ answer.answer_text }}
+        {% if answer.choices is 1 %}
+        --- это ваш ответ
+        {% endif %}
+        {% if answer.correct_answer is 1 %}
+        --- это правильный ответ
+        {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'opros:vote_again' question.variant_id question.id %}">Перейти к следующему вопросу</a>
+{% endblock %}
+</body>
+</html>
+
+
+

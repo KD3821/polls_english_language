@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block title %}<title>Вы готовы пройти ТЕСТ?</title>{% endblock %}
+</head>
+
+<body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'opros/style.css' %}">
+  {% block sidebar %}
+  <ul class="sidebar-nav">
+    ВЫ ГОТОВЫ ПРОЙТИ ТЕСТ?
+    {% if user.is_authenticated %}
+    <li> User: {{ user.get_username }}</li>
+    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+    {% else %}
+    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+    {% endif %}
+  </ul>
+
+  {% endblock %}
+  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список тестов:</title>
+</head>
+<body>
+{% extends "base_generic.html" %}
+{% block content %}
+<h3>Список вариантов теста:</h3>
+<ul>
+    {% for variant in var_vopr %}
+    <li><a href="{% url 'opros:index_v' variant.id %}">{{ variant.variant_text }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>

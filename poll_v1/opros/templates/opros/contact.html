@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base_generic.html" %}
+{% block content %}
+<h2>Задать вопрос преподавателю:</h2>
+<form action="{% url 'opros:contact_us'  %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
+
+{% endblock %}

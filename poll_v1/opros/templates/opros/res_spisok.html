@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>{{ variant.variant_text }}</h1>
+
+    {% for newvar in variant.student_user_set.all %}
+    <ol>
+        <ol>
+        <p>
+        {% if newvar.user_zovut_id == request.user.id %}
+            {% if newvar.variant_sdelal_id == variant.id %}
+                {{ newvar.question_text_sdelal }}
+                <ul>
+                {{ newvar.answer_pravil }} --- правильный ответ <br/>
+                {{ newvar.answer_sdelal }} --- ваш ответ
+                </ul>
+                <p>
+                <br>
+                </p>
+            {% endif %}
+        {% endif %}
+        </p>
+        </ol>
+    </ol>
+    {% endfor %}
+    <p>
+    Ваш результат:
+    {% for somevar in variant.table_res_set.all %}
+        {% if somevar.uchenik == request.user.id %}
+            {% if somevar.variant_done_id == variant.id %}
+                {{ somevar.mark }}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    %
+    </p>
+
+<h2>Задать вопрос преподавателю:</h2>
+<form action="{% url 'opros:contact_us'  %}" method="post">
+    {% csrf_token %}
+    <label for="id_subject">Имя пользователя</label>
+    <input id="id_subject" type="text" name="subject" maxlength="100" required value="username">
+    <label for="id_content">Текст вопроса</label>
+    <textarea id="id_content" name="content" required></textarea></p>
+    <button type="submit">Отправить</button>
+</form>
+<br/>
+
+<a href="{% url 'opros:index_t' %}">Пройти еще тест</a>
+{% endblock %}
+</body>
+</html>
