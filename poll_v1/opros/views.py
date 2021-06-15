@@ -24,7 +24,7 @@ def mail_to(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'], 'mysoftdev@yandex.ru', ['korden3821@gmail.com'], fail_silently=False)
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'], 'mail_from_person@mail.com', ['mail_to_person@mail.com'], fail_silently=False)
             if mail:
                 messages.success(request, 'Письмо отправлено!')
                 return redirect('../')
